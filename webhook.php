@@ -1,7 +1,7 @@
 <?php
 // parameters
-$hubVerifyToken = 'test1234TokEn';
-$accessToken = "EAAGNSgRefKQBAD5MOSUHvmnJdSjQwxjNXBJLDY2ST6kgYuiNTzsqjQq3TNW621blNXRLjH7oZA2BctJfq0HVrAFTZCQlqLdjl2Lps060iIehWj7sJpuTvQS5yQWDMCorG4jnoKlkYRj9GaHipeSsOn56O4lw3roFIc33laxwZDZD";
+$hubVerifyToken = 'TOKEN123456abcd';
+$accessToken = "EAAGNSgRefKQBAI4sgSF441xDhSInbZAdhUGiwIz9pmjxswG9rErw95J18C8M3SWSXlTV8sGZBvgidYlpvhwvRyfZCg1Ahebi9z1hAauBS0s9TzkDmKYfecHcRT9hZBZCAtgjSfbTZBZCm8M2OZATn18NtK41ocbKAwShVYyB5ZCOy7wZDZD";
 // check token at setup
 if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
   echo $_REQUEST['hub_challenge'];
@@ -25,5 +25,3 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_exec($ch);
 curl_close($ch);
-
-?>
