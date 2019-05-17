@@ -18,17 +18,17 @@ if($messageText == "hi") {
       'recipient' => [ 'id' => $senderId ],
       'message' => [ 'text' => $answer ]
   ];
-  pushMsg($response);
+  pushMsg($response,$accessToken);
 }else{
   $answer = "I don't understand. Ask me 'hi'.";
   $response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-pushMsg($response);
+pushMsg($response,$accessToken);
 }
 
-function pushMsg($response){
+function pushMsg($response,$accessToken){
 $ch = curl_init('https://graph.facebook.com/v3.3/me/messages?access_token='.$accessToken);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
