@@ -14,6 +14,8 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 
 if($messageText == "hi") {
     $answer = "Hello";
+}else{
+  $answer = "I don't understand. Ask me 'hi'.";
 }
 $response = [
     'recipient' => [ 'id' => $senderId ],
