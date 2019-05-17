@@ -14,8 +14,6 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 
 if($messageText == "hi") {
     $answer = "Hello";
-}elseif ($messageText != "hi") {
-    $answer = "D";
 }
 $response = [
     'recipient' => [ 'id' => $senderId ],
