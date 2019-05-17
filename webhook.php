@@ -1,18 +1,15 @@
 <?php
 
-
 $access_token = "EAAEsPnhI9PsBAPaKEmS67h4zmEkrTZB6FZBZAc9RwIxmu62Qk7ZCPRZCZBvVZCZAc11taUEi2a8Tx5C9bapUSZCPylxaGfi76frnE7HJtlZBKqzmBgE7Go4sK0HPDjp8xmSvjAWVa85UMF6JuGlOVszOevipT66SRJf97dxZAdOC8SdMwZDZD";
 $verify_token = "TOKEN123456abcd";
 $hub_verify_token = null;
- 
+
 if(isset($_REQUEST['hub_challenge'])) {
-    $challenge = $_REQUEST['hub_challenge'];
-    $hub_verify_token = $_REQUEST['hub_verify_token'];
+ $challenge = $_REQUEST['hub_challenge'];
+ $hub_verify_token = $_REQUEST['hub_verify_token'];
 }
- 
- 
 if ($hub_verify_token === $verify_token) {
-    echo $challenge;
+ echo $challenge;
 }
 
 // handle bot's anwser
