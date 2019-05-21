@@ -19,13 +19,18 @@ $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 
-$senderId = "239606837378485";
-$messageText = "sadasd";
 $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
 	$qury = mysqli_query($connect,$sqltext);
 	if($qury){
+               echo"<h1>ชื่อของคุณได้เก็บเข้าระบบแล้วครับ</h1>";
+               echo "<script type='text/javascript'>window.close();</script>";
   }	
   
+if($messageText == "ss") {
+    $answer = "Hello";
+}else{
+  $answer = "I don't understand. Ask me 'hi'.";
+}
 $response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
