@@ -16,7 +16,7 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
-$senderId = "239606837378485";
+$senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 
 $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
