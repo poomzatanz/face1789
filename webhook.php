@@ -26,9 +26,17 @@ $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
                echo "<script type='text/javascript'>window.close();</script>";
   }	
   
-if($messageText == "ss") {
+  $sqltext1 = "SELECT * FROM `Learn` WHERE input = '".$messageText."'";
+  $qury1 = mysqli_query($connect,$sqltext1);
+    $result=mysqli_fetch_array($qury1,MYSQLI_ASSOC);
+
+if($messageText == "hello") {
     $answer = "Hello ".$senderId." ";
-}else{
+}
+elseif ($result) {
+    $answer = $result['out'];
+}
+else{
   $answer = "I don't understand. Ask me 'hi'.";
 }
 $response = [
