@@ -32,7 +32,7 @@ if($messageText == "ss") {
   $answer = "I don't understand. Ask me 'hi'.";
 }
 $response = [
-    'recipient' => [ 'id' => '239606837378485' ],
+    'recipient' => [ 'id' => '2396068373784859' ],
     'message' => [ 'text' => $answer ]
 ];
 $ch = curl_init('https://graph.facebook.com/v3.3/me/messages?access_token='.$accessToken);
