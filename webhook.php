@@ -40,7 +40,7 @@ else{
   $answer = "I don't understand. Ask me 'hi'.";
 }
 $response = [
-    'recipient' => [ 'id' => '2396068373784859' ],
+    'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
 $ch = curl_init('https://graph.facebook.com/v3.3/me/messages?access_token='.$accessToken);
