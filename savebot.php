@@ -16,6 +16,7 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 }
  $n=$_POST['name'];
  $l=$_POST['last'];
+ $flag = '0';
 $input = json_decode(file_get_contents('php://input'), true);
         $sqltext1 = "SELECT * FROM `Learn` WHERE input = '".$n."'";
 		$qury1 = mysqli_query($connect,$sqltext1);
@@ -31,9 +32,11 @@ $input = json_decode(file_get_contents('php://input'), true);
     
 	if($qury){
         $message = "ขอบคุณที่สอนครับ";
+        $flag = '0';
 	}
     }else {
         $message = "ขอโทษครับนี้สอนไปแล้วครับ";
+        $flag = '1';
     }
     	
 $response = [
@@ -46,6 +49,12 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_exec($ch);
 curl_close($ch);
+if($flag=='0'){
+    echo "<script> window.location='sucess.php'; </script>";
+}else{
+    echo "<script> window.location='fail.php'; </script>";
+}
+
 mysqli_close($connect);
 exit;
 }
