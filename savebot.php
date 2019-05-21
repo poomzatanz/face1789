@@ -11,7 +11,7 @@ $hubVerifyToken = 'TOKEN123456abcd';
 $accessToken = "EAAEsPnhI9PsBAPaKEmS67h4zmEkrTZB6FZBZAc9RwIxmu62Qk7ZCPRZCZBvVZCZAc11taUEi2a8Tx5C9bapUSZCPylxaGfi76frnE7HJtlZBKqzmBgE7Go4sK0HPDjp8xmSvjAWVa85UMF6JuGlOVszOevipT66SRJf97dxZAdOC8SdMwZDZD";
 // check token at setup
 if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
-  echo $_REQUEST['hub_challenge'];
+  
   exit;
 }
 
