@@ -45,10 +45,8 @@ else{
 addFace($accessToken,$response)
 }
 
-}else{
-
 }
-function addFace($accessToken,$response){
+function pushMsg($arrayHeader,$arrayPostData){
   $ch = curl_init('https://graph.facebook.com/v3.3/me/messages?access_token='.$accessToken);
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
@@ -56,4 +54,5 @@ function addFace($accessToken,$response){
   curl_exec($ch);
   curl_close($ch);
 }
-
+exit;
+?>
