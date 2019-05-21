@@ -1,4 +1,11 @@
 <?php
+$host="db4free.net";
+$user="poomzatan123456";
+$password="0811582889zX";
+$connect=mysqli_connect($host,$user,$password,"testdb1234567");
+mysqli_set_charset($connect,"UTF8");
+if($connect)
+{
 
 $hubVerifyToken = 'TOKEN123456abcd';
 $accessToken = "EAAEsPnhI9PsBAPaKEmS67h4zmEkrTZB6FZBZAc9RwIxmu62Qk7ZCPRZCZBvVZCZAc11taUEi2a8Tx5C9bapUSZCPylxaGfi76frnE7HJtlZBKqzmBgE7Go4sK0HPDjp8xmSvjAWVa85UMF6JuGlOVszOevipT66SRJf97dxZAdOC8SdMwZDZD";
@@ -11,13 +18,6 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
-$host="db4free.net";
-$user="poomzatan123456";
-$password="0811582889zX";
-$connect=mysqli_connect($host,$user,$password,"testdb1234567");
-mysqli_set_charset($connect,"UTF8");
-if($connect)
-{
 
 $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
 	$qury = mysqli_query($connect,$sqltext);
@@ -29,12 +29,19 @@ $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
 
 if($messageText == "hello") {
     $answer = "Hello ".$senderId." ";
-
     $response = [
       'recipient' => [ 'id' => '2396068373784859' ],
       'message' => [ 'text' => $answer ]
   ];
-  addFace($accessToken,$response)
+  pushMsg($accessToken,$response);
+}
+elseif ($result) {
+    $answer = $result['out'];
+    $response = [
+      'recipient' => [ 'id' => '2396068373784859' ],
+      'message' => [ 'text' => $answer ]
+  ];
+  pushMsg($accessToken,$response);
 }
 else{
   $answer = "I don't understand. Ask me 'hi'.";
@@ -42,8 +49,10 @@ else{
     'recipient' => [ 'id' => '2396068373784859' ],
     'message' => [ 'text' => $answer ]
 ];
-addFace($accessToken,$response)
+pushMsg($accessToken,$response);
 }
+
+exit;
 
 }
 function pushMsg($arrayHeader,$arrayPostData){
@@ -53,7 +62,5 @@ function pushMsg($arrayHeader,$arrayPostData){
   curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
   curl_exec($ch);
   curl_close($ch);
+  
 }
-exit;
-?>
-
