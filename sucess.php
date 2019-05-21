@@ -1,7 +1,6 @@
-<html>
-<body>
-<h1>ขอบคุณที่สอนนะครับ </h1>
+
 <?php 
+echo "<h1>ขอบคุณที่สอนนะครับ </h1>";
 echo"<script>
 var timeleft = 5;
 var downloadTimer = setInterval(function(){
@@ -17,5 +16,3 @@ var downloadTimer = setInterval(function(){
 ";
 
 ?>
-</body>
-</html>
