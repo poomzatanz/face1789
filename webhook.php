@@ -21,10 +21,7 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 
 $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
 	$qury = mysqli_query($connect,$sqltext);
-	if($qury){
-               echo"<h1>ชื่อของคุณได้เก็บเข้าระบบแล้วครับ</h1>";
-               echo "<script type='text/javascript'>window.close();</script>";
-  }	
+	if($qury){ }	
   
   $sqltext1 = "SELECT * FROM `Learn` WHERE input = '".$messageText."'";
   $qury1 = mysqli_query($connect,$sqltext1);
