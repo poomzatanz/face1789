@@ -1,11 +1,5 @@
 <?php
-$host="db4free.net";
-$user="poomzatan123456";
-$password="0811582889zX";
-$connect=mysqli_connect($host,$user,$password,"testdb1234567");
-mysqli_set_charset($connect,"UTF8");
-if($connect)
-{
+
 
 $hubVerifyToken = 'TOKEN123456abcd';
 $accessToken = "EAAEsPnhI9PsBAPaKEmS67h4zmEkrTZB6FZBZAc9RwIxmu62Qk7ZCPRZCZBvVZCZAc11taUEi2a8Tx5C9bapUSZCPylxaGfi76frnE7HJtlZBKqzmBgE7Go4sK0HPDjp8xmSvjAWVa85UMF6JuGlOVszOevipT66SRJf97dxZAdOC8SdMwZDZD";
@@ -14,7 +8,13 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
   echo $_REQUEST['hub_challenge'];
   exit;
 }
-
+$host="db4free.net";
+$user="poomzatan123456";
+$password="0811582889zX";
+$connect=mysqli_connect($host,$user,$password,"testdb1234567");
+mysqli_set_charset($connect,"UTF8");
+if($connect)
+{
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
