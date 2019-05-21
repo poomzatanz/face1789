@@ -27,7 +27,7 @@ $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
   }	
   
 if($messageText == "ss") {
-    $answer = "Hello";
+    $answer = "Hello".$senderId;
 }else{
   $answer = "I don't understand. Ask me 'hi'.";
 }
