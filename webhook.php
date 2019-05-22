@@ -35,10 +35,6 @@ if($messageText == "hi") {
         ]
       ]
       ]];
-      $response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => $answer
-];
 }
 //send message to facebook bot
 $response = [
