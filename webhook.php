@@ -15,10 +15,7 @@ $response = null;
 //set Message
 if($messageText == "hi") {
     $answer = "Hello1";
-    $response = [
-      'recipient' => [ 'id' => $senderId ],
-      'message' => $answer 
-    ];
+   
 }if($messageText == "blog"){
   $answer = ["attachment"=>[
    "type"=>"template",
@@ -50,7 +47,10 @@ if($messageText == "hi") {
  'recipient' => [ 'id' => $senderId ],
  'message' => $answer 
 ];}
-
+$response = [
+  'recipient' => [ 'id' => $senderId ],
+  'message' => $answer 
+];
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
