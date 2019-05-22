@@ -1,18 +1,23 @@
 
 <?php 
-echo "<h1>ขอบคุณที่สอนนะครับ </h1>";
-echo"<script>
-var timeleft = 5;
-var downloadTimer = setInterval(function(){
-  document.getElementById('progressBar').value = 5 - timeleft;
-  timeleft -= 1;
-  if(timeleft <= 0){
-   window.location='username.php';
-  }else{ 
-        
-}, 1000);
-</script>
-<progress value='0' max='5' id='progressBar'></progress>
-";
-
+"message":{
+  "attachment":{
+    "type":"template",
+    "payload":{
+      "template_type":"button",
+      "text":"What do you want to do next?",
+      "buttons":[
+        {
+          "type":"web_url",
+          "url":"https://www.messenger.com",
+          "title":"Visit Messenger"
+        },
+        {
+          ...
+        },
+        {...}
+      ]
+    }
+  }
+}
 ?>

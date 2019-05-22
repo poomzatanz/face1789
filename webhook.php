@@ -16,7 +16,20 @@ $response = null;
 if($messageText == "hi") {
     $answer = "Hello";
 }elseif($messageText == "more") {  
-  $answer = "test";
+  $answer = ["attachment"=>[  
+    "type"=>"template", 
+   "payload"=> [  
+     "template_type"=>"button", 
+     "text"=>"What do you want to do next?", 
+    "buttons"=>[
+        [
+          "type"=>"web_url",
+          "url"=>"https://www.messenger.com",
+          "title"=>"Show Website"
+        ]
+      ]
+    ]
+    ]];
 }elseif ($messageText=="test") {
   $answer = "test";
 }
