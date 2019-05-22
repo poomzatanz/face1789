@@ -35,6 +35,8 @@ if($messageText == "hi") {
         ]
       ]
       ]];
+}elseif ($messageText=="test") {
+  $answer = "test";
 }
 //send message to facebook bot
 $response = [
