@@ -32,33 +32,44 @@ $sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
 
 if($messageText == "hello") {
     $answer = "Hello ".$senderId." ";
+    $response = [
+      'recipient' => [ 'id' => $senderId ],
+      'message' => [ 'text' => $answer ]
+  ];
 }
 elseif ($result) {
     $answer = $result['out'];
-}elseif($answer=='test'){
-  $answer = [
-    'attachment' => [
-      'type' => 'template',
-      'payload'=> [
-        'template_type' => 'button',
-        'text' => 'test',
-        'buttons' =>  [
-            'type' => 'web_url',
-            'url' => 'https://www.anime-sugoi.com',
-            'title' => 'test'
-          ]
-        
-      ]
-    ]
+    $response = [
+      'recipient' => [ 'id' => $senderId ],
+      'message' => [ 'text' => $answer ]
   ];
 }
-}
 else{
-  $answer = 'test';
-$response = [
+  $answer = ["attachment"=>[
+      "type"=>"template",
+      "payload"=>[
+        "template_type"=>"button",
+        "text"=>"What do you want to do next?",
+        "buttons"=>[
+          [
+            "type"=>"web_url",
+            "url"=>"https://petersapparel.parseapp.com",
+            "title"=>"Show Website"
+          ],
+          [
+            "type"=>"postback",
+            "title"=>"Start Chatting",
+            "payload"=>"USER_DEFINED_PAYLOAD"
+          ]
+        ]
+      ]
+      ]];
+      $response = [
     'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
+    'message' => $answer
 ];
+}
+
 $ch = curl_init('https://graph.facebook.com/v3.3/me/messages?access_token='.$accessToken);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
