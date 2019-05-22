@@ -35,25 +35,26 @@ if($messageText == "hello") {
 }
 elseif ($result) {
     $answer = $result['out'];
-}
-else{
+}elseif($answer=='test'){
   $answer = [
     'attachment' => [
       'type' => 'template',
       'payload'=> [
         'template_type' => 'button',
         'text' => 'test',
-        'buttons' => [
-          [
+        'buttons' =>  [
             'type' => 'web_url',
             'url' => 'https://www.anime-sugoi.com',
             'title' => 'test'
           ]
-        ]
+        
       ]
     ]
   ];
 }
+}
+else{
+  $answer = 'test';
 $response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
