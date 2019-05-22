@@ -8,47 +8,56 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
   echo $_REQUEST['hub_challenge'];
   exit;
 }
-$host="db4free.net";
-$user="poomzatan123456";
-$password="0811582889zX";
-$connect=mysqli_connect($host,$user,$password,"testdb1234567");
-mysqli_set_charset($connect,"UTF8");
-if($connect)
-{
 $input = json_decode(file_get_contents('php://input'), true);
-$senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
-$messageText = $input['entry'][0]['messaging'][0]['message']['text'];
-
-$sqltext = "INSERT INTO `idFace` (`id`, `idface`) VALUES (NULL, '$senderId');";
-	$qury = mysqli_query($connect,$sqltext);
-	if($qury){
-               echo"<h1>ชื่อของคุณได้เก็บเข้าระบบแล้วครับ</h1>";
-               echo "<script type='text/javascript'>window.close();</script>";
-  }	
+$page_id = $input['entry'][0]['id'];
+$sender = $input['entry'][0]['messaging'][0]['sender']['id'];
+$message = isset($input['entry'][0]['messaging'][0]['message']['text']) ? $input['entry'][0]['messaging'][0]['message']['text']: '' ;
+$postback = isset($input['entry'][0]['messaging'][0]['postback']['payload']) ? $input['entry'][0]['messaging'][0]['postback']['payload']: '' ;
+if($message || $postback) { 
   
-  $sqltext1 = "SELECT * FROM `Learn` WHERE input = '".$messageText."'";
-  $qury1 = mysqli_query($connect,$sqltext1);
-    $result=mysqli_fetch_array($qury1,MYSQLI_ASSOC);
-
-if($messageText == "hello") {
-    $answer = "Hello ".$senderId." ";
-}
-elseif ($result) {
-    $answer = $result['out'];
-}
-else{
-  $answer = "I don't understand. Ask me 'hi'.";
-}
-$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
-$ch = curl_init('https://graph.facebook.com/v3.3/me/messages?access_token='.$accessToken);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-curl_exec($ch);
-curl_close($ch);
-mysqli_close($connect);
-exit;
+  
+  if($message) {
+       // If Page receives Message, process the Message and prepare content to reply
+       $reply = 'Message received: ' . $message;
+  }
+  else {
+    
+    // If Page receives Postback, process the Postback and prepare content to reply
+      
+    switch($postback) {
+    
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_HELP':
+        $reply = 'You clicked Help button';
+        break;
+        
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_LATEST_POSTS':
+        $reply = 'You clicked Latest Post button';
+        break;
+    
+    
+    }
+  
+  }
+  
+  
+   $responseJSON = '{
+    "recipient":{
+      "id":"'.$sender.'"
+    },
+    "message": {
+            "text":"'. $reply .'"
+        }
+  }';
+  $access_token = 'your_page_access_token';
+  
+  //Graph API URL
+  $url = 'https://graph.facebook.com/v2.7/me/messages?access_token='.$accessToken;
+  // Using cURL to send a JSON POST data
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $responseJSON);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+  $result = curl_exec($ch);
+  curl_close($ch);
+  
 }
