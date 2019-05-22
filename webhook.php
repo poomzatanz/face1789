@@ -44,7 +44,7 @@ elseif ($result) {
       'message' => [ 'text' => $answer ]
   ];
 }
-else{
+elseif($messageText == "test"){
   $answer = ["attachment"=>[
       "type"=>"template",
       "payload"=>[
