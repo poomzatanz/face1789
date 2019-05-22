@@ -15,60 +15,31 @@ $response = null;
 //set Message
 if($messageText == "hi") {
     $answer = "Hello";
-}elseif($messageText == "today"){
+}elseif($messageText == "more") {  
   $answer = ["attachment"=>[
-       "type"=>"template",
-       "payload"=>[
-         "template_type"=>"list",
-         "elements"=>[
-           [
-              "title"=> "Classic T-Shirt Collection",
-                     "image_url"=> "https://www.cloudways.com/blog/wp-content/uploads/Migrating-Your-Symfony-Website-To-Cloudways-Banner.jpg",
-                     "subtitle"=> "See all our colors",
-                     "default_action"=> [
-                         "type"=> "web_url",
-                         "url"=> "https://www.cloudways.com/blog/migrate-symfony-from-cpanel-to-cloud-hosting/",                       
-                         "webview_height_ratio"=> "tall",
-                         // "messenger_extensions"=> true,
-                         // "fallback_url"=> "https://peterssendreceiveapp.ngrok.io/"
-                     ],
-             "buttons"=>[
-               [
-                 "type"=>"web_url",
-                 "url"=>"https://petersfancybrownhats.com",
-                 "title"=>"View Website"
-               ],
-             ]
-           ],
-             [
-             "title"=>"Welcome to Peter\'s Hats",
-             "item_url"=>"https://www.cloudways.com/blog/migrate-symfony-from-cpanel-to-cloud-hosting/",
-             "image_url"=>"https://www.cloudways.com/blog/wp-content/uploads/Migrating-Your-Symfony-Website-To-Cloudways-Banner.jpg",
-             "subtitle"=>"We\'ve got the right hat for everyone.",
-             "buttons"=>[
-               [
-                 "type"=>"web_url",
-                 "url"=>"https://petersfancybrownhats.com",
-                 "title"=>"View Website"
-               ],
-             ]
-           ],
-             [
-             "title"=>"Welcome to Peter\'s Hats",
-             "item_url"=>"https://www.cloudways.com/blog/migrate-symfony-from-cpanel-to-cloud-hosting/",
-             "image_url"=>"https://www.cloudways.com/blog/wp-content/uploads/Migrating-Your-Symfony-Website-To-Cloudways-Banner.jpg",
-             "subtitle"=>"We\'ve got the right hat for everyone.",
-             "buttons"=>[
-               [
-                 "type"=>"web_url",
-                 "url"=>"https://petersfancybrownhats.com",
-                 "title"=>"View Website"
-               ],
-             ]
-           ]
-         ]
-       ]
-     ]];
+      "type"=>"template",
+      "payload"=>[
+        "template_type"=>"button",
+        "text"=>"What do you want to do next?",
+        "buttons"=>[
+          [
+            "type"=>"web_url",
+            "url"=>"https://petersapparel.parseapp.com",
+            "title"=>"Show Website"
+          ],
+          [
+            "type"=>"postback",
+            "title"=>"Start Chatting",
+            "payload"=>"USER_DEFINED_PAYLOAD"
+          ]
+        ]
+      ]
+      ]];
+      $response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => $answer
+];
+}
 //send message to facebook bot
 $response = [
     'recipient' => [ 'id' => $senderId ],
